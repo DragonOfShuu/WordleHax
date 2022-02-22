@@ -86,8 +86,93 @@ namespace WordleHacks
 
                 /*Uri uri = new Uri("/WordleWords.json", UriKind.Relative);
                 StreamResourceInfo info = Application.GetContentStream(uri);*/
+
                 var listString = JsonSerializer.Deserialize<string[]>(text);
-                Trace.WriteLine(listString[4]);
+                Trace.WriteLine(listString[50]);
+                // Trace.WriteLine(listString[4]);
+
+                var pres_chars = present_characters.Text;
+                var abs_chars = absent_characters.Text;
+                string[] pos_chars = new string[] { Pos_index_0.Text, Pos_index_1.Text, Pos_index_2.Text, Pos_index_3.Text, Pos_index_4.Text };
+                List<string> possible_words = new List<string>();
+
+                // Containment Start
+
+                for (var i = 0; i < listString.Length; i++)
+                {
+                    string str = listString[i].ToUpper();
+                    // Trace.WriteLine(str);
+
+                    // If absent chars found, continue to the next word.
+                    bool nextWord = false;
+                    if (abs_chars != "")
+                    {
+                        foreach (char c in abs_chars)
+                        {
+                            if (str.Contains(c))
+                            {
+                                nextWord = true;
+                                break;
+                            }
+                        }
+                        if (nextWord)
+                        {
+                            continue;
+                        }
+                    }
+
+                    // If containing characters not found, continue to next word.
+                    if (pres_chars != "")
+                    {
+                        nextWord = false;
+                        foreach (char c in pres_chars)
+                        {
+                            if (!str.Contains(c))
+                            {
+                                nextWord=true;
+                                break;
+                            }
+                        }
+                        if (nextWord)
+                        {
+                            continue;
+                        }
+                    }
+
+                    // If positional characters not found, continue to next word.
+                    nextWord = false;
+                    for (var f = 0; f < pos_chars.Length; f++)
+                    {
+                        string letter = pos_chars[f];
+                        if (letter != "" && letter != str[f].ToString())
+                        {
+                            nextWord = true;
+                            break;
+                        }
+                    }
+                    if (nextWord)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        possible_words.Add(str);
+                        // Trace.WriteLine(possible_words.Count);
+                    }
+                }
+                
+                // Containment Area End
+
+                PossibleWords PossibleWindow = new PossibleWords();
+                // PossibleWindow.textLocation.Text 
+                string newText = "";
+                Trace.WriteLine(possible_words.Count);
+                for (var i = 0; i < possible_words.Count; i++)
+                {
+                    newText = newText + possible_words[i] + "\n";
+                }
+                PossibleWindow.textLocation.Text = newText;
+                PossibleWindow.Show();
             } 
             catch (IOException error)
             {
