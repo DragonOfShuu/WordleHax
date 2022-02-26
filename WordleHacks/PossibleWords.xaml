@@ -6,17 +6,91 @@
         xmlns:local="clr-namespace:WordleHacks"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        WindowStyle="ToolWindow"
-        Title="Possible Word List" Height="260" Width="200">
-    <StackPanel Orientation="Vertical" Margin="10">
-        <ScrollViewer Height="160">
-            <TextBlock Name="textLocation" TextWrapping="Wrap"/>
-        </ScrollViewer>
-        <Button 
-            HorizontalAlignment="Center" 
-            Padding="15 2"
-            Margin="0 15"
-            Click="Button_Click"
-            >OK</Button>
-    </StackPanel>
+        WindowStyle="None"
+        Background="#272738"
+        MouseDown="Window_MouseDown"
+        Title="Possible Word List" Height="280" Width="220">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="{x:Type ScrollViewer}">
+            <Setter Property="Background" Value="#252536"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+    </Window.Resources>
+    <Border
+        BorderBrush="#151526"
+        BorderThickness="2"
+        >
+        <StackPanel Orientation="Vertical">
+        <DockPanel>
+            <StackPanel FlowDirection="RightToLeft" DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button
+                    Width="20"
+                    Height="20"
+                    Background="LightSalmon"
+                    Foreground="White"
+                    Click="Button_Click_1"
+                    >
+                    X
+                </Button>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel Orientation="Vertical" Margin="10">
+                <Border
+                    BorderBrush="#666677" 
+                    BorderThickness="2"
+                    >
+                    <ScrollViewer 
+                        Height="160"
+                        >
+                    <Border Margin="5">
+                        <TextBlock 
+                        Name="textLocation" 
+                        TextWrapping="Wrap"
+                        Text="Text"
+                        FontSize="15"
+                    />
+                    </Border>
+                    </ScrollViewer>
+                </Border>
+                <DockPanel>
+                <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Margin="10">
+                    <TextBlock 
+                    HorizontalAlignment="Center"
+                    >Font Size
+                    </TextBlock>
+                    <Slider 
+                    Name="FontSizeSlider"
+                    HorizontalAlignment="Center" 
+                    Width="80" 
+                    Margin="0 10 0 0" 
+                    Minimum="8" 
+                    Maximum="25" 
+                    Value="12"
+                />
+                </StackPanel>
+                <DockPanel
+                
+                Margin="10"
+                >
+                    <Button 
+                    Name="okButton"
+                    DockPanel.Dock="Top"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Padding="15 2"
+                    Click="Button_Click"
+                >OK</Button>
+                    <TextBlock
+                    Name="percentage"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    >100%</TextBlock>
+                </DockPanel>
+            </DockPanel>
+        </StackPanel>
+        </StackPanel>
+    </Border>
 </Window>
