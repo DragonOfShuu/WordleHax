@@ -5,10 +5,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>WordleHaxLogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="saveData.json" />
+    <None Remove="WordleHaxLogo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,9 +20,13 @@
 		<Content Include="saveData.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="WordleHaxLogo.ico" />
 		<Content Include="WordleWords.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="WordleHaxLogo.ico" />
 	</ItemGroup>
 
 </Project>
